@@ -1,2 +1,0 @@
-config SHIELD_BUGBEARZMNRIGHT
-    def_bool $(shields_list_contains,bugbearzmnright)
