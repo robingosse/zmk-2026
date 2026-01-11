@@ -1,6 +1,23 @@
 #include <dt-bindings/zmk/matrix_transform.h>
 
 / {
+
+    /* Add this near the top, inside the root / { } but outside other nodes */
+    ps2_mouse: ps2_mouse {
+        compatible = "zmk,input-mouse-ps2";
+        // Data Pin: P0.09
+        data-gpios = <&gpio0 9 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
+        // Clock Pin: P0.10
+        clk-gpios = <&gpio0 10 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
+    };
+    
+    /* Update the 'chosen' block to include the mouse */
+    chosen {
+        zmk,kscan = &kscan0;
+        zmk,physical-layout = &physical_layout0;
+        zmk,input = &ps2_mouse; // <--- This line links the TrackPoint
+    };
+
     chosen {
         zmk,kscan = &kscan0;
         zmk,physical-layout = &physical_layout0;
