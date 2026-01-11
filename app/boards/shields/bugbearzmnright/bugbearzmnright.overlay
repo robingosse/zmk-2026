@@ -1,26 +1,19 @@
 #include <dt-bindings/zmk/matrix_transform.h>
 
 / {
+    chosen {
+        zmk,kscan = &kscan0;
+        zmk,physical-layout = &physical_layout0;
+        zmk,input = &ps2_mouse;
+    };
 
-    /* Add this near the top, inside the root / { } but outside other nodes */
+    /* TRACKPOINT CONFIGURATION */
     ps2_mouse: ps2_mouse {
         compatible = "zmk,input-mouse-ps2";
-        // Data Pin: P0.09
+        /* P0.09 = Data, P0.10 = Clock */
         data-gpios = <&gpio0 9 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
-        // Clock Pin: P0.10
         clk-gpios = <&gpio0 10 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
-    };
-    
-    /* Update the 'chosen' block to include the mouse */
-    chosen {
-        zmk,kscan = &kscan0;
-        zmk,physical-layout = &physical_layout0;
-        zmk,input = &ps2_mouse; // <--- This line links the TrackPoint
-    };
-
-    chosen {
-        zmk,kscan = &kscan0;
-        zmk,physical-layout = &physical_layout0;
+        status = "okay";
     };
 
     kscan0: kscan0 {
@@ -28,31 +21,28 @@
         diode-direction = "col2row"; 
         wakeup-source;
 
-        /* TESTING NEW PINS 
-           If a key works, check which Logical Col it belongs to below
-        */
         col-gpios
-            = <&gpio0 9  GPIO_ACTIVE_LOW>  // If works: You are on Pin 9 (Top Left)
-            , <&gpio0 10 GPIO_ACTIVE_LOW>  // If works: You are on Pin 10 (Top Left)
-            , <&gpio1 11 GPIO_ACTIVE_LOW>  // If works: You are on Pin 1.11 (Top Left)
-            , <&gpio1 13 GPIO_ACTIVE_LOW>  // If works: You are on Pin 1.13 (Top Left)
-            , <&gpio0 2  GPIO_ACTIVE_LOW>  // If works: You are on Pin 2 (Top Right)
-            , <&gpio0 29 GPIO_ACTIVE_LOW>  // If works: You are on Pin 29 (Top Right)
+            = <&gpio0 24 GPIO_ACTIVE_LOW> // Col 0
+            , <&gpio0 22 GPIO_ACTIVE_LOW> // Col 1
+            , <&gpio0 20 GPIO_ACTIVE_LOW> // Col 2
+            , <&gpio0 17 GPIO_ACTIVE_LOW> // Col 3
+            , <&gpio1 15 GPIO_ACTIVE_LOW> // Col 4 (Pin 1.15)
+            , <&gpio0 11 GPIO_ACTIVE_LOW> // Col 5 (Pin 11 / P0.11)
             ;
 
-        /* TESTING NEW PINS 
-           If a key works, check which Logical Row it belongs to below
-        */
         row-gpios
-            = <&gpio0 31 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)> // If types Row 1 keys: You are on Pin 31
-            , <&gpio0 6  (GPIO_ACTIVE_LOW | GPIO_PULL_UP)> // If types Row 2 keys: You are on Pin 6 (Bottom Right)
-            , <&gpio0 8  (GPIO_ACTIVE_LOW | GPIO_PULL_UP)> // If types Row 3 keys: You are on Pin 8 (Bottom Right)
-            , <&gpio0 12 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)> // If types Row 4 keys: You are on Pin 12 (Bottom Left)
-            , <&gpio0 7  (GPIO_ACTIVE_LOW | GPIO_PULL_UP)> // If types Row 5 keys: You are on Pin 7 (Left Cluster)
+            /* Based on your 'vcxz' test:
+               - You said "Physical Row 1 is mapping Row 3 keys". 
+                 Row 3 was mapped to Pin 1.04. So we move Pin 1.04 to the Row 1 slot.
+            */
+            = <&gpio1 0 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>  // Row 0
+            , <&gpio1 4 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>  // Row 1 (Was R3)
+            , <&gpio1 6 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>  // Row 2 (Was R4)
+            , <&gpio1 1 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>  // Row 3 (Trying Pin 1.01)
+            , <&gpio1 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>  // Row 4 (Trying Pin 1.02)
             ;
     };
 
-    // Standard transform to map the test inputs to letters
     default_transform: keymap_transform0 {
         compatible = "zmk,matrix-transform";
         columns = <6>;
@@ -65,7 +55,7 @@
             RC(4,0) RC(4,1) RC(4,2) RC(4,3) RC(4,4) RC(4,5)
         >;
     };
-    
+
     physical_layout0: physical_layout_0 {
         compatible = "zmk,physical-layout";
         display-name = "Default Layout";
