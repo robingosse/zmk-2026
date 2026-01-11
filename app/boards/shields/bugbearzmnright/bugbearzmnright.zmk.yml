@@ -1,0 +1,7 @@
+file_format: "1"
+id: bugbearzmnright
+name: BugbearZmk Right
+type: shield
+requires: [nice_nano]
+features:
+  - keys
