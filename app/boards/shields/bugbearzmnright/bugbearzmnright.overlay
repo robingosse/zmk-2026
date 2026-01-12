@@ -7,16 +7,10 @@
         zmk,input = &ps2_mouse;
     };
 
-    /* TRACKPOINT CONFIGURATION
-       Standard mapping for this module:
-       Pin 0=GND
-       Pin 1=Data (GPIO 8)
-       Pin 2=Clk  (GPIO 6)
-       Pin 3=RST  (Bridged to VCC)
-       Pin 4=VCC
-    */
+    /* TRACKPOINT CONFIGURATION */
     ps2_mouse: ps2_mouse {
         compatible = "zmk,input-mouse-ps2";
+        /* Standard Mapping: Data=8, Clk=6 */
         data-gpios = <&gpio0 8 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
         clk-gpios = <&gpio0 6 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
         status = "okay";
