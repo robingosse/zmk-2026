@@ -8,7 +8,7 @@
     };
 
     /* TRACKPOINT CONFIGURATION 
-       (Data=9, Clk=10 is standard. Ensure you POWER CYCLE after flashing!)
+       (Data=9, Clk=10 is standard)
     */
     ps2_mouse: ps2_mouse {
         compatible = "zmk,input-mouse-ps2";
@@ -27,18 +27,19 @@
             , <&gpio0 22 GPIO_ACTIVE_LOW> // C1
             , <&gpio0 20 GPIO_ACTIVE_LOW> // C2
             , <&gpio0 17 GPIO_ACTIVE_LOW> // C3
-            // Trying HIGH DRIVE strength to wake up dead columns
-            , <&gpio1 15 (GPIO_ACTIVE_LOW | GPIO_DRIVE_S0H1)> // C4
-            , <&gpio0 11 (GPIO_ACTIVE_LOW | GPIO_DRIVE_S0H1)> // C5
+            , <&gpio1 15 GPIO_ACTIVE_LOW> // C4 (Pin 1.15)
+            , <&gpio0 11 GPIO_ACTIVE_LOW> // C5 (Pin 11 / P0.11)
             ;
 
         row-gpios
-            /* THE UNSCRAMBLED ORDER */
-            = <&gpio1 0 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>  // Row 0 (QWERTY)
-            , <&gpio1 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>  // Row 1 (ASDF) -> Was acting as Thumbs
-            , <&gpio1 4 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>  // Row 2 (ZXCV) -> Was acting as ASDF
-            , <&gpio1 6 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>  // Row 3 (Numbers) -> Was acting as ZXCV
-            , <&gpio1 1 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>  // Row 4 (Thumbs) -> The last pin left
+            /* LOGICAL MAPPING FIX
+               Based on your report that Phys Row 1 types "Thumbs", etc.
+            */
+            = <&gpio1 0 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>  // R0 (QWERTY) - Pin 1.00
+            , <&gpio1 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>  // R1 (ASDF)   - Pin 1.02
+            , <&gpio1 4 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>  // R2 (ZXCV)   - Pin 1.04
+            , <&gpio1 6 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>  // R3 (Numbers)- Pin 1.06
+            , <&gpio1 1 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>  // R4 (Thumbs) - Pin 1.01
             ;
     };
 
