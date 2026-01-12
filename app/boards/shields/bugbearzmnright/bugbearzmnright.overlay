@@ -7,12 +7,15 @@
         zmk,input = &ps2_mouse;
     };
 
-    /* TRACKPOINT CONFIGURATION */
+    /* TRACKPOINT CONFIGURATION 
+       ATTEMPT 2: SWAPPED PINS
+       If this works, your physical wires were just reversed (super common).
+    */
     ps2_mouse: ps2_mouse {
         compatible = "zmk,input-mouse-ps2";
-        /* P0.09 = Data, P0.10 = Clock */
-        data-gpios = <&gpio0 9 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
-        clk-gpios = <&gpio0 10 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
+        // SWAPPED: Data is now 10, Clock is now 9
+        data-gpios = <&gpio0 10 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
+        clk-gpios = <&gpio0 9 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
         status = "okay";
     };
 
@@ -22,24 +25,20 @@
         wakeup-source;
 
         col-gpios
-            = <&gpio0 24 GPIO_ACTIVE_LOW> // Col 0
-            , <&gpio0 22 GPIO_ACTIVE_LOW> // Col 1
-            , <&gpio0 20 GPIO_ACTIVE_LOW> // Col 2
-            , <&gpio0 17 GPIO_ACTIVE_LOW> // Col 3
-            , <&gpio1 15 GPIO_ACTIVE_LOW> // Col 4 (Pin 1.15)
-            , <&gpio0 11 GPIO_ACTIVE_LOW> // Col 5 (Pin 11 / P0.11)
+            = <&gpio0 24 GPIO_ACTIVE_LOW> // C0
+            , <&gpio0 22 GPIO_ACTIVE_LOW> // C1
+            , <&gpio0 20 GPIO_ACTIVE_LOW> // C2
+            , <&gpio0 17 GPIO_ACTIVE_LOW> // C3
+            , <&gpio1 15 GPIO_ACTIVE_LOW> // C4 (Pin 1.15)
+            , <&gpio0 11 GPIO_ACTIVE_LOW> // C5 (Pin 11)
             ;
 
         row-gpios
-            /* Based on your 'vcxz' test:
-               - You said "Physical Row 1 is mapping Row 3 keys". 
-                 Row 3 was mapped to Pin 1.04. So we move Pin 1.04 to the Row 1 slot.
-            */
-            = <&gpio1 0 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>  // Row 0
-            , <&gpio1 4 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>  // Row 1 (Was R3)
-            , <&gpio1 6 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>  // Row 2 (Was R4)
-            , <&gpio1 1 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>  // Row 3 (Trying Pin 1.01)
-            , <&gpio1 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>  // Row 4 (Trying Pin 1.02)
+            = <&gpio1 0 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>  // R0
+            , <&gpio1 4 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>  // R1
+            , <&gpio1 6 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>  // R2
+            , <&gpio1 1 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>  // R3
+            , <&gpio1 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>  // R4
             ;
     };
 
