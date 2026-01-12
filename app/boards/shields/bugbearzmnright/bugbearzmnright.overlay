@@ -7,14 +7,13 @@
         zmk,input = &ps2_mouse;
     };
 
-    /* TRACKPOINT CONFIGURATION
-       Wired to P0.08 and P0.06 (Blue Pins)
-       Trial 1: Data = 8, Clk = 6
+    /* TRACKPOINT: ATTEMPT 2 (SWAPPED)
+       Data = P0.06, Clk = P0.08
     */
     ps2_mouse: ps2_mouse {
         compatible = "zmk,input-mouse-ps2";
-        data-gpios = <&gpio0 8 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
-        clk-gpios = <&gpio0 6 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
+        data-gpios = <&gpio0 6 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
+        clk-gpios = <&gpio0 8 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
         status = "okay";
     };
 
@@ -24,22 +23,22 @@
         wakeup-source;
 
         col-gpios
-            /* GREEN PINS (0 -> 5) */
-            = <&gpio0 31 GPIO_ACTIVE_LOW> // C0 (Green 0)
-            , <&gpio0 29 GPIO_ACTIVE_LOW> // C1 (Green 1)
-            , <&gpio0 2  GPIO_ACTIVE_LOW> // C2 (Green 2)
-            , <&gpio1 15 GPIO_ACTIVE_LOW> // C3 (Green 3)
-            , <&gpio1 13 GPIO_ACTIVE_LOW> // C4 (Green 4 - Next to 1.15)
-            , <&gpio1 11 GPIO_ACTIVE_LOW> // C5 (Green 5 - Next to 1.13)
+            /* GREEN PINS (Keep as is, seems correct if "T" worked) */
+            = <&gpio0 31 GPIO_ACTIVE_LOW> // C0 (Pin 31)
+            , <&gpio0 29 GPIO_ACTIVE_LOW> // C1 (Pin 29)
+            , <&gpio0 2  GPIO_ACTIVE_LOW> // C2 (Pin 2)
+            , <&gpio1 15 GPIO_ACTIVE_LOW> // C3 (Pin 1.15)
+            , <&gpio1 13 GPIO_ACTIVE_LOW> // C4 (Pin 1.13 - inferred)
+            , <&gpio1 11 GPIO_ACTIVE_LOW> // C5 (Pin 1.11 - inferred)
             ;
 
         row-gpios
-            /* RED PINS (0 -> 4) */
-            = <&gpio0 17 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)> // R0 (Red 0)
-            , <&gpio0 20 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)> // R1 (Red 1)
-            , <&gpio0 22 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)> // R2 (Red 2)
-            , <&gpio0 24 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)> // R3 (Red 3)
-            , <&gpio1 0  (GPIO_ACTIVE_LOW | GPIO_PULL_UP)> // R4 (Red 4)
+            /* RED PINS (REVERSED) */
+            = <&gpio1 0  (GPIO_ACTIVE_LOW | GPIO_PULL_UP)> // R0 (Red 4 - Pin 1.00) -> NOW TOP ROW
+            , <&gpio0 24 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)> // R1 (Red 3 - Pin 24)
+            , <&gpio0 22 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)> // R2 (Red 2 - Pin 22)
+            , <&gpio0 20 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)> // R3 (Red 1 - Pin 20)
+            , <&gpio0 17 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)> // R4 (Red 0 - Pin 17) -> NOW THUMBS
             ;
     };
 
