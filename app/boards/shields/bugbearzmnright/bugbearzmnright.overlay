@@ -7,14 +7,12 @@
         zmk,input = &ps2_mouse;
     };
 
-    /* TRACKPOINT: ATTEMPT 4
-       If this fails, we MUST verify Pin 1 is actually Ground with a multimeter.
-       Current: Data=8, Clk=6 (Same as last time, but let's fix keys first)
-    */
+    /* TRACKPOINT CONFIG */
     ps2_mouse: ps2_mouse {
         compatible = "zmk,input-mouse-ps2";
-        data-gpios = <&gpio0 8 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
-        clk-gpios = <&gpio0 6 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
+        /* We use PULL_UP to ensure the line floats high */
+        data-gpios = <&gpio0 6 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
+        clk-gpios = <&gpio0 8 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
         status = "okay";
     };
 
@@ -24,22 +22,22 @@
         wakeup-source;
 
         col-gpios
-            /* FLIPPING COLUMNS (To fix "nbvcxz" -> "zxcvbn") */
-            = <&gpio0 31 GPIO_ACTIVE_LOW> // C0 (Pin 31 - Left)
-            , <&gpio0 29 GPIO_ACTIVE_LOW> // C1 (Pin 29)
-            , <&gpio0 2  GPIO_ACTIVE_LOW> // C2 (Pin 2)
-            , <&gpio1 15 GPIO_ACTIVE_LOW> // C3 (Pin 1.15)
-            , <&gpio1 13 GPIO_ACTIVE_LOW> // C4 (Pin 1.13)
-            , <&gpio1 11 GPIO_ACTIVE_LOW> // C5 (Pin 1.11 - Right)
+            /* KEEPING YOUR WORKING "MIRROR FIX" */
+            = <&gpio1 11 GPIO_ACTIVE_LOW> // C0
+            , <&gpio1 13 GPIO_ACTIVE_LOW> // C1
+            , <&gpio1 15 GPIO_ACTIVE_LOW> // C2
+            , <&gpio0 2  GPIO_ACTIVE_LOW> // C3
+            , <&gpio0 29 GPIO_ACTIVE_LOW> // C4
+            , <&gpio0 31 GPIO_ACTIVE_LOW> // C5
             ;
 
         row-gpios
-            /* FLIPPING ROWS (To fix "Row 4 types Top Row") */
-            = <&gpio0 17 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)> // R0 (Pin 17) -> Top Row
-            , <&gpio0 20 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)> // R1 (Pin 20)
-            , <&gpio0 22 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)> // R2 (Pin 22)
-            , <&gpio0 24 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)> // R3 (Pin 24)
-            , <&gpio1 0  (GPIO_ACTIVE_LOW | GPIO_PULL_UP)> // R4 (Pin 1.00) -> Thumbs
+            /* KEEPING YOUR WORKING "REVERSE FIX" */
+            = <&gpio0 17 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)> // R0
+            , <&gpio0 20 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)> // R1
+            , <&gpio0 22 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)> // R2
+            , <&gpio0 24 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)> // R3
+            , <&gpio1 0  (GPIO_ACTIVE_LOW | GPIO_PULL_UP)> // R4
             ;
     };
 
