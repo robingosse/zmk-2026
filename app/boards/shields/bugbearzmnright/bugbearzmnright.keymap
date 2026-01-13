@@ -11,9 +11,7 @@
                 &kp E     &kp O  &kp Y  &kp G  &kp F  &kp DEL
                 &kp QMARK &kp A  &kp I  &kp K  &kp M  &kp RETURN
                 &kp X     &kp X  &kp HOME &kp END &kp X &kp X
-           # Top: Left, Middle, Right 
                 &mo 1 &mo 2 &kp PRINTSCREEN
-           # Top: Left, Middle, Right                 
                 &kp SPACE &kp COMMA &kp DOT
             >;
         };
@@ -23,9 +21,7 @@
                 &kp E     &kp n4  &kp n5   &kp n6  &kp BACKSLASH  &kp DEL
                 &trans    &kp n1  &kp n2   &kp n3  &kp MINUS  &kp RETURN
                 &trans    &trans  &kp LBKT &kp RBKT &trans &trans
-            # Top: Left, Middle, Right 
                 &kp mo 1 &kp mo 2 &kp mo 3
-            # Bottom: Left, Middle, Right
                 &kp SPACE &kp COMMA &kp DOT
 
     };
