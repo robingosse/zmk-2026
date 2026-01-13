@@ -1,12 +1,4 @@
-#include <behaviors.dtsi>
 #include <dt-bindings/zmk/matrix_transform.h>
-
-/* * CONFLICT FIX: 
- * behaviors.dtsi defines 'RC' as Right Control. 
- * We undefine it here so we can use 'RC' for (Row, Col) in the matrix below.
- */
-#undef RC
-#define RC(r, c) ((r << 5) | (c))
 
 / {
     chosen {
@@ -51,7 +43,42 @@
         >;
     };
 
-    /* 3. Define the Physical Layout (Using &none as a placeholder) */
+    /* 3. Define Dummy Keys (CRITICAL FIX: Added #key-cells = <0>) */
+    /* These act as valid placeholders for the Studio layout */
+    keys {
+        k0: k0   { #key-cells = <0>; };
+        k1: k1   { #key-cells = <0>; };
+        k2: k2   { #key-cells = <0>; };
+        k3: k3   { #key-cells = <0>; };
+        k4: k4   { #key-cells = <0>; };
+        k5: k5   { #key-cells = <0>; };
+        k6: k6   { #key-cells = <0>; };
+        k7: k7   { #key-cells = <0>; };
+        k8: k8   { #key-cells = <0>; };
+        k9: k9   { #key-cells = <0>; };
+        k10: k10 { #key-cells = <0>; };
+        k11: k11 { #key-cells = <0>; };
+        k12: k12 { #key-cells = <0>; };
+        k13: k13 { #key-cells = <0>; };
+        k14: k14 { #key-cells = <0>; };
+        k15: k15 { #key-cells = <0>; };
+        k16: k16 { #key-cells = <0>; };
+        k17: k17 { #key-cells = <0>; };
+        k18: k18 { #key-cells = <0>; };
+        k19: k19 { #key-cells = <0>; };
+        k20: k20 { #key-cells = <0>; };
+        k21: k21 { #key-cells = <0>; };
+        k22: k22 { #key-cells = <0>; };
+        k23: k23 { #key-cells = <0>; };
+        k24: k24 { #key-cells = <0>; };
+        k25: k25 { #key-cells = <0>; };
+        k26: k26 { #key-cells = <0>; };
+        k27: k27 { #key-cells = <0>; };
+        k28: k28 { #key-cells = <0>; };
+        k29: k29 { #key-cells = <0>; };
+    };
+
+    /* 4. Define the Physical Layout */
     physical_layout0: physical_layout_0 {
         compatible = "zmk,physical-layout";
         display-name = "Default Layout";
@@ -59,44 +86,44 @@
         kscan = <&kscan0>;
         keys = <
             /* Row 1 */
-            &none 0    0    100 100
-            &none 100  0    100 100
-            &none 200  0    100 100
-            &none 300  0    100 100
-            &none 400  0    100 100
-            &none 500  0    100 100
+            &k0   0    0    100 100
+            &k1   100  0    100 100
+            &k2   200  0    100 100
+            &k3   300  0    100 100
+            &k4   400  0    100 100
+            &k5   500  0    100 100
             
             /* Row 2 */
-            &none 0    100  100 100
-            &none 100  100  100 100
-            &none 200  100  100 100
-            &none 300  100  100 100
-            &none 400  100  100 100
-            &none 500  100  100 100
+            &k6   0    100  100 100
+            &k7   100  100  100 100
+            &k8   200  100  100 100
+            &k9   300  100  100 100
+            &k10  400  100  100 100
+            &k11  500  100  100 100
 
             /* Row 3 */
-            &none 0    200  100 100
-            &none 100  200  100 100
-            &none 200  200  100 100
-            &none 300  200  100 100
-            &none 400  200  100 100
-            &none 500  200  100 100
+            &k12  0    200  100 100
+            &k13  100  200  100 100
+            &k14  200  200  100 100
+            &k15  300  200  100 100
+            &k16  400  200  100 100
+            &k17  500  200  100 100
 
             /* Row 4 */
-            &none 0    300  100 100
-            &none 100  300  100 100
-            &none 200  300  100 100
-            &none 300  300  100 100
-            &none 400  300  100 100
-            &none 500  300  100 100
+            &k18  0    300  100 100
+            &k19  100  300  100 100
+            &k20  200  300  100 100
+            &k21  300  300  100 100
+            &k22  400  300  100 100
+            &k23  500  300  100 100
 
             /* Row 5 */
-            &none 0    400  100 100
-            &none 100  400  100 100
-            &none 200  400  100 100
-            &none 300  400  100 100
-            &none 400  400  100 100
-            &none 500  400  100 100
+            &k24  0    400  100 100
+            &k25  100  400  100 100
+            &k26  200  400  100 100
+            &k27  300  400  100 100
+            &k28  400  400  100 100
+            &k29  500  400  100 100
         >;
     };
 };
