@@ -3,8 +3,8 @@
 / {
     chosen {
         zmk,kscan = &kscan0;
-        /* THIS IS THE MISSING LINE THAT FIXES THE BUILD ERROR: */
         zmk,matrix-transform = &default_transform;
+        zmk,physical-layout = &physical_layout0;
     };
 
     kscan0: kscan0 {
