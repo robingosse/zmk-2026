@@ -1,5 +1,12 @@
-#include <dt-bindings/zmk/matrix_transform.h>
 #include <behaviors.dtsi>
+#include <dt-bindings/zmk/matrix_transform.h>
+
+/* * CONFLICT FIX: 
+ * behaviors.dtsi defines 'RC' as Right Control. 
+ * We undefine it here so we can use 'RC' for (Row, Col) in the matrix below.
+ */
+#undef RC
+#define RC(r, c) ((r << 5) | (c))
 
 / {
     chosen {
@@ -44,7 +51,7 @@
         >;
     };
 
-    /* 3. Define the Physical Layout (Using &none as a valid placeholder) */
+    /* 3. Define the Physical Layout (Using &none as a placeholder) */
     physical_layout0: physical_layout_0 {
         compatible = "zmk,physical-layout";
         display-name = "Default Layout";
