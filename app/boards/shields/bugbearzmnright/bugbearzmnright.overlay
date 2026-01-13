@@ -43,8 +43,9 @@
         >;
     };
 
-    /* 3. Define Dummy Keys (CRITICAL FIX: Added #key-cells = <0>) */
-    /* These act as valid placeholders for the Studio layout */
+    /* 3. Define Dummy Keys */
+    /* CRITICAL FIX: We add #key-cells = <0> manually. 
+       This satisfies the compiler WITHOUT needing to include behaviors.dtsi */
     keys {
         k0: k0   { #key-cells = <0>; };
         k1: k1   { #key-cells = <0>; };
