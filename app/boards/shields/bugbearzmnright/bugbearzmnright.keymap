@@ -23,6 +23,6 @@
                 &TRANS      &TRANS  &kp LBKT &kp RBKT &TRANS &TRANS
                 &mo 1 &mo 2 &kp PRINTSCREEN
                 &kp SPACE &kp COMMA &kp DOT
-
+            >;
     };
 };
