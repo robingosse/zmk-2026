@@ -17,7 +17,7 @@
         };
         layer_1 {
             bindings = <
-                &equal    &kp n7  &kp n8   &kp n9  &kp SLASH  &kp BSPC
+                &kp equal    &kp n7  &kp n8   &kp n9  &kp SLASH  &kp BSPC
                 &kp E     &kp n4  &kp n5   &kp n6  &kp BACKSLASH  &kp DEL
                 &trans    &kp n1  &kp n2   &kp n3  &kp MINUS  &kp RETURN
                 &trans    &trans  &kp LBKT &kp RBKT &trans &trans
