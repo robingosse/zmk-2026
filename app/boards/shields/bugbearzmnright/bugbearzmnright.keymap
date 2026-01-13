@@ -18,9 +18,9 @@
         layer_1 {
             bindings = <
                 &kp EQUAL   &kp N7  &kp N8   &kp N9  &kp SLASH  &kp BSPC
-                &kp E       &kp N4  &kp N5   &kp N6  &kp BACKSLASH  &kp DEL
-                &TRANS      &kp N1  &kp N2   &kp N3  &kp MINUS  &kp RETURN
-                &TRANS      &TRANS  &kp LBKT &kp RBKT &TRANS &TRANS
+                &kp X       &kp N4  &kp N5   &kp N6  &kp BACKSLASH  &kp DEL
+                &kp X      &kp N1  &kp N2   &kp N3  &kp MINUS  &kp RETURN
+                &kp X      &kp X  &kp LBKT &kp RBKT &kp X &kp X
                 &mo 1 &mo 2 &kp PRINTSCREEN
                 &kp SPACE &kp COMMA &kp DOT
             >;
