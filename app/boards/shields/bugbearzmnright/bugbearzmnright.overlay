@@ -43,13 +43,38 @@
         >;
     };
 
-    /* 3. Define Dummy Keys (FIXED: Removed 'compatible' to avoid errors) */
+    /* 3. Define Dummy Keys (FIXED: Added #key-cells to satisfy compiler) */
     keys {
-        k0: k0 {}; k1: k1 {}; k2: k2 {}; k3: k3 {}; k4: k4 {}; k5: k5 {};
-        k6: k6 {}; k7: k7 {}; k8: k8 {}; k9: k9 {}; k10: k10 {}; k11: k11 {};
-        k12: k12 {}; k13: k13 {}; k14: k14 {}; k15: k15 {}; k16: k16 {}; k17: k17 {};
-        k18: k18 {}; k19: k19 {}; k20: k20 {}; k21: k21 {}; k22: k22 {}; k23: k23 {};
-        k24: k24 {}; k25: k25 {}; k26: k26 {}; k27: k27 {}; k28: k28 {}; k29: k29 {};
+        k0: k0 { #key-cells = <0>; };
+        k1: k1 { #key-cells = <0>; };
+        k2: k2 { #key-cells = <0>; };
+        k3: k3 { #key-cells = <0>; };
+        k4: k4 { #key-cells = <0>; };
+        k5: k5 { #key-cells = <0>; };
+        k6: k6 { #key-cells = <0>; };
+        k7: k7 { #key-cells = <0>; };
+        k8: k8 { #key-cells = <0>; };
+        k9: k9 { #key-cells = <0>; };
+        k10: k10 { #key-cells = <0>; };
+        k11: k11 { #key-cells = <0>; };
+        k12: k12 { #key-cells = <0>; };
+        k13: k13 { #key-cells = <0>; };
+        k14: k14 { #key-cells = <0>; };
+        k15: k15 { #key-cells = <0>; };
+        k16: k16 { #key-cells = <0>; };
+        k17: k17 { #key-cells = <0>; };
+        k18: k18 { #key-cells = <0>; };
+        k19: k19 { #key-cells = <0>; };
+        k20: k20 { #key-cells = <0>; };
+        k21: k21 { #key-cells = <0>; };
+        k22: k22 { #key-cells = <0>; };
+        k23: k23 { #key-cells = <0>; };
+        k24: k24 { #key-cells = <0>; };
+        k25: k25 { #key-cells = <0>; };
+        k26: k26 { #key-cells = <0>; };
+        k27: k27 { #key-cells = <0>; };
+        k28: k28 { #key-cells = <0>; };
+        k29: k29 { #key-cells = <0>; };
     };
 
     /* 4. Define the Physical Layout */
