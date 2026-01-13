@@ -1,13 +1,15 @@
 #include <dt-bindings/zmk/matrix_transform.h>
 #include <behaviors.dtsi>
 
-/* * FIX 1: Rename the macro to 'MX'.
- * This avoids the conflict with 'RC' (Right Control) in behaviors.dtsi.
+/* * FIX 1: Rename the Matrix Macro to 'MX'.
+ * We use 'MX' instead of 'RC' to define the matrix coordinates.
+ * This completely avoids the conflict with "Right Control" in behaviors.dtsi.
  */
 #define MX(r, c) ((r) * 6 + (c))
 
 /* * FIX 2: Patch the &none behavior.
- * We add #key-cells so ZMK Studio accepts it as a physical key placeholder.
+ * We manually add #key-cells to &none. This tricks ZMK Studio into 
+ * accepting it as a valid physical key placeholder.
  */
 &none {
     #key-cells = <0>;
@@ -45,7 +47,7 @@
         compatible = "zmk,matrix-transform";
         columns = <6>;
         rows = <5>;
-        /* Using MX macro to avoid 'RC' conflict */
+        /* FIX 3: Use the new MX macro here to match the definition above */
         map = <
             MX(0,0) MX(0,1) MX(0,2) MX(0,3) MX(0,4) MX(0,5)
             MX(1,0) MX(1,1) MX(1,2) MX(1,3) MX(1,4) MX(1,5)
