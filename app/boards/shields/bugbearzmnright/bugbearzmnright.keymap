@@ -11,8 +11,10 @@
                 &kp E     &kp O  &kp Y  &kp G  &kp F  &kp DEL
                 &kp QMARK &kp A  &kp I  &kp K  &kp M  &kp RETURN
                 &kp X     &kp X  &kp HOME &kp END &kp X &kp X
-                &mo 1 &mo 2 &kp PRINTSCREEN
+                
                 &kp SPACE &kp COMMA &kp DOT
+                &mo 1 &mo 2 &kp PRINTSCREEN
+
             >;
         };
         layer_1 {
@@ -21,8 +23,9 @@
                 &kp X       &kp N4  &kp N5   &kp N6  &kp BACKSLASH  &kp DEL
                 &kp X      &kp N1  &kp N2   &kp N3  &kp MINUS  &kp RETURN
                 &kp X      &kp X  &kp LBKT &kp RBKT &kp X &kp X
-                &mo 1 &mo 2 &kp PRINTSCREEN
+
                 &kp SPACE &kp COMMA &kp DOT
+                &mo 1 &mo 2 &kp PRINTSCREEN
             >;
        };
     };
