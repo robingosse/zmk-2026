@@ -1,7 +1,6 @@
-/ {
-    model = "bugbearzmnright";
-    compatible = "bugbearzmnright";
+#include <dt-bindings/zmk/matrix_transform.h>
 
+/ {
     chosen {
         zmk,physical-layout = &physical_layout0;
     };
@@ -9,10 +8,48 @@
     physical_layout0: physical_layout_0 {
         compatible = "zmk,physical-layout";
         display-name = "Default Layout";
+        transform = <&default_transform>;
+        kscan = <&kscan0>;
         keys = <
-            &k0  0 0  1900 1900    // Key 1 at 0,0
-            &k1 1900 0 1900 1900   // Key 2 at 19mm,0
-            // ... You must write this line for EVERY key ...
+            /* Row 1 */
+            &kp 0     0    100 100
+            &kp 100   0    100 100
+            &kp 200   0    100 100
+            &kp 300   0    100 100
+            &kp 400   0    100 100
+            &kp 500   0    100 100
+            
+            /* Row 2 */
+            &kp 0     100  100 100
+            &kp 100   100  100 100
+            &kp 200   100  100 100
+            &kp 300   100  100 100
+            &kp 400   100  100 100
+            &kp 500   100  100 100
+
+            /* Row 3 */
+            &kp 0     200  100 100
+            &kp 100   200  100 100
+            &kp 200   200  100 100
+            &kp 300   200  100 100
+            &kp 400   200  100 100
+            &kp 500   200  100 100
+
+            /* Row 4 */
+            &kp 0     300  100 100
+            &kp 100   300  100 100
+            &kp 200   300  100 100
+            &kp 300   300  100 100
+            &kp 400   300  100 100
+            &kp 500   300  100 100
+
+            /* Row 5 */
+            &kp 0     400  100 100
+            &kp 100   400  100 100
+            &kp 200   400  100 100
+            &kp 300   400  100 100
+            &kp 400   400  100 100
+            &kp 500   400  100 100
         >;
     };
 };
