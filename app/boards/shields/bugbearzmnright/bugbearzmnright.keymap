@@ -1,4 +1,4 @@
-urn#include <behaviors.dtsi>
+#include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 
 / {
