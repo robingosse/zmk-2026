@@ -11,10 +11,7 @@
                 &kp E     &kp O  &kp Y  &kp G  &kp F  &kp DEL
                 &kp QMARK &kp A  &kp I  &kp K  &kp M  &kp ENTER
                 &kp X     &kp X  &kp HOME &kp END &kp X &kp X
-                # Top: Left, Middle, Right 
-                &kp mo 1 &kp mo 2 &kp PRINTSCREEN
-                # Bottom: Left, Middle, Right
-                &kp SPACE &kp COMMA &kp DOT
+                &kp mo 1 &kp mo 2 &kp PRINTSCREEN &kp SPACE &kp COMMA &kp DOT
             >;
         };
         layer_1 {
@@ -25,33 +22,6 @@
                 &trans    &trans  &kp LBKT &kp RBKT &trans &trans
                 # Top: Left, Middle, Right 
                 &kp mo 1 &kp mo 2 &kp mo 3
-                # Bottom: Left, Middle, Right
-                &kp SPACE &kp COMMA &kp DOT
-            >;
-        };
-        layer_2 {
-            bindings = <
-                &kp RPAR  &kp T  &kp J  &kp Q  &kp U  &kp BSPC
-                &kp E     &kp O  &kp Y  &kp G  &kp F  &kp DEL
-                &kp QMARK &kp A  &kp I  &kp K  &kp M  &kp ENTER
-                &kp X     &kp X  &kp HOME &kp END &kp X &kp X
-                # Top: Left, Middle, Right 
-                &kp mo 1 &kp mo 2 &kp mo 3
-                # Bottom: Left, Middle, Right
-                &kp SPACE &kp COMMA &kp DOT
-            >;
-        };
-        layer_3 {
-            bindings = <
-                &kp RPAR  &kp T  &kp J  &kp Q  &kp U  &kp BSPC
-                &kp E     &kp O  &kp Y  &kp G  &kp F  &kp DEL
-                &kp QMARK &kp A  &kp I  &kp K  &kp M  &kp ENTER
-                &kp X     &kp X  &kp HOME &kp END &kp X &kp X
-                # Top: Left, Middle, Right 
-                &kp mo 1 &kp mo 2 &kp mo 3
-                # Bottom: Left, Middle, Right
-                &kp SPACE &kp COMMA &kp DOT
-            >;
-        };
+                # Bottom: Left, Middle, Right &kp SPACE &kp COMMA &kp DOT
     };
 };
