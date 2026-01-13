@@ -7,7 +7,7 @@
         zmk,physical-layout = &physical_layout0;
     };
 
-    /* 1. Define the Matrix (How the pins connect) */
+    /* 1. Define the Matrix */
     kscan0: kscan0 {
         compatible = "zmk,kscan-gpio-matrix";
         diode-direction = "col2row"; 
@@ -29,7 +29,7 @@
             ;
     };
 
-    /* 2. Define the Map (How matrix points map to logical keys) */
+    /* 2. Define the Map */
     default_transform: keymap_transform0 {
         compatible = "zmk,matrix-transform";
         columns = <6>;
@@ -43,10 +43,8 @@
         >;
     };
 
-    /* 3. Define Dummy Keys (Required for Studio to verify locations) */
-    /* We create empty nodes k0-k29 just so we can point to them below */
+    /* 3. Define Dummy Keys (FIXED: Removed 'compatible' to avoid errors) */
     keys {
-        compatible = "gpio-keys";
         k0: k0 {}; k1: k1 {}; k2: k2 {}; k3: k3 {}; k4: k4 {}; k5: k5 {};
         k6: k6 {}; k7: k7 {}; k8: k8 {}; k9: k9 {}; k10: k10 {}; k11: k11 {};
         k12: k12 {}; k13: k13 {}; k14: k14 {}; k15: k15 {}; k16: k16 {}; k17: k17 {};
@@ -54,7 +52,7 @@
         k24: k24 {}; k25: k25 {}; k26: k26 {}; k27: k27 {}; k28: k28 {}; k29: k29 {};
     };
 
-    /* 4. Define the Physical Layout (The Visual Grid for Studio) */
+    /* 4. Define the Physical Layout */
     physical_layout0: physical_layout_0 {
         compatible = "zmk,physical-layout";
         display-name = "Default Layout";
