@@ -7,6 +7,7 @@
         zmk,physical-layout = &physical_layout0;
     };
 
+    /* 1. Define the Matrix (How the pins connect) */
     kscan0: kscan0 {
         compatible = "zmk,kscan-gpio-matrix";
         diode-direction = "col2row"; 
@@ -28,6 +29,7 @@
             ;
     };
 
+    /* 2. Define the Map (How matrix points map to logical keys) */
     default_transform: keymap_transform0 {
         compatible = "zmk,matrix-transform";
         columns = <6>;
@@ -41,6 +43,18 @@
         >;
     };
 
+    /* 3. Define Dummy Keys (Required for Studio to verify locations) */
+    /* We create empty nodes k0-k29 just so we can point to them below */
+    keys {
+        compatible = "gpio-keys";
+        k0: k0 {}; k1: k1 {}; k2: k2 {}; k3: k3 {}; k4: k4 {}; k5: k5 {};
+        k6: k6 {}; k7: k7 {}; k8: k8 {}; k9: k9 {}; k10: k10 {}; k11: k11 {};
+        k12: k12 {}; k13: k13 {}; k14: k14 {}; k15: k15 {}; k16: k16 {}; k17: k17 {};
+        k18: k18 {}; k19: k19 {}; k20: k20 {}; k21: k21 {}; k22: k22 {}; k23: k23 {};
+        k24: k24 {}; k25: k25 {}; k26: k26 {}; k27: k27 {}; k28: k28 {}; k29: k29 {};
+    };
+
+    /* 4. Define the Physical Layout (The Visual Grid for Studio) */
     physical_layout0: physical_layout_0 {
         compatible = "zmk,physical-layout";
         display-name = "Default Layout";
@@ -48,44 +62,44 @@
         kscan = <&kscan0>;
         keys = <
             /* Row 1 */
-            &kp 0     0    100 100
-            &kp 100   0    100 100
-            &kp 200   0    100 100
-            &kp 300   0    100 100
-            &kp 400   0    100 100
-            &kp 500   0    100 100
+            &k0   0    0    100 100
+            &k1   100  0    100 100
+            &k2   200  0    100 100
+            &k3   300  0    100 100
+            &k4   400  0    100 100
+            &k5   500  0    100 100
             
             /* Row 2 */
-            &kp 0     100  100 100
-            &kp 100   100  100 100
-            &kp 200   100  100 100
-            &kp 300   100  100 100
-            &kp 400   100  100 100
-            &kp 500   100  100 100
+            &k6   0    100  100 100
+            &k7   100  100  100 100
+            &k8   200  100  100 100
+            &k9   300  100  100 100
+            &k10  400  100  100 100
+            &k11  500  100  100 100
 
             /* Row 3 */
-            &kp 0     200  100 100
-            &kp 100   200  100 100
-            &kp 200   200  100 100
-            &kp 300   200  100 100
-            &kp 400   200  100 100
-            &kp 500   200  100 100
+            &k12  0    200  100 100
+            &k13  100  200  100 100
+            &k14  200  200  100 100
+            &k15  300  200  100 100
+            &k16  400  200  100 100
+            &k17  500  200  100 100
 
             /* Row 4 */
-            &kp 0     300  100 100
-            &kp 100   300  100 100
-            &kp 200   300  100 100
-            &kp 300   300  100 100
-            &kp 400   300  100 100
-            &kp 500   300  100 100
+            &k18  0    300  100 100
+            &k19  100  300  100 100
+            &k20  200  300  100 100
+            &k21  300  300  100 100
+            &k22  400  300  100 100
+            &k23  500  300  100 100
 
             /* Row 5 */
-            &kp 0     400  100 100
-            &kp 100   400  100 100
-            &kp 200   400  100 100
-            &kp 300   400  100 100
-            &kp 400   400  100 100
-            &kp 500   400  100 100
+            &k24  0    400  100 100
+            &k25  100  400  100 100
+            &k26  200  400  100 100
+            &k27  300  400  100 100
+            &k28  400  400  100 100
+            &k29  500  400  100 100
         >;
     };
 };
