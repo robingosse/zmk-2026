@@ -10,7 +10,7 @@
                 &kp RPAR  &kp T  &kp J  &kp Q  &kp U  &kp BSPC
                 &kp E     &kp O  &kp Y  &kp G  &kp F  &kp DEL
                 &kp QMARK &kp A  &kp I  &kp K  &kp M  &kp RETURN
-                &kp X     &kp X  &kp HOME &kp END &kp X &kp X
+                &kp X     &kp X  &kp LEFT &kp RIGHT &kp X &kp X
                 
                 &kp SPACE &kp COMMA &kp DOT
                 &mo 1 &mo 2 &kp PRINTSCREEN
