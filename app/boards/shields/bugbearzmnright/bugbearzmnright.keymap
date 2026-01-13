@@ -11,7 +11,8 @@
                 &kp E     &kp O  &kp Y  &kp G  &kp F  &kp DEL
                 &kp QMARK &kp A  &kp I  &kp K  &kp M  &kp ENTER
                 &kp X     &kp X  &kp HOME &kp END &kp X &kp X
-                &kp LCTRL &kp SPACE &kp LGUI &kp RALT &kp ENTER &kp RCTRL
+                # 
+                &kp N1 &kp N2 &kp N3 &kp N4 &kp N5 &kp N6
             >;
         };
     };
