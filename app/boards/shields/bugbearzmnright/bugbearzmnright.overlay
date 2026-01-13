@@ -2,15 +2,14 @@
 #include <behaviors.dtsi>
 
 /* * FIX 1: DEFINE 'MX' MACRO 
- * We use this instead of 'RC' to define the matrix. 
- * This prevents the name conflict with behaviors.dtsi.
- * ((row * 6) + col) is the standard ZMK calculation.
+ * We use 'MX' instead of 'RC' to define the matrix. 
+ * This prevents the name conflict with "Right Control" in behaviors.dtsi.
  */
 #define MX(r, c) ((r * 6) + c)
 
 /* * FIX 2: PATCH &none
  * We add #key-cells to the existing &none node.
- * This satisfies the "lacks #key-cells" error from the physical layout.
+ * This satisfies the "lacks #key-cells" error from ZMK Studio.
  */
 &none {
     #key-cells = <0>;
@@ -45,7 +44,7 @@
             ;
     };
 
-    /* Map Definition (Using MX instead of RC) */
+    /* Map Definition (Uses MX to avoid conflicts) */
     default_transform: keymap_transform0 {
         compatible = "zmk,matrix-transform";
         columns = <6>;
@@ -59,7 +58,7 @@
         >;
     };
 
-    /* Physical Layout (Using &none with the patch applied above) */
+    /* Physical Layout (Uses the patched &none) */
     physical_layout0: physical_layout_0 {
         compatible = "zmk,physical-layout";
         display-name = "Default Layout";
