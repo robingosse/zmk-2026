@@ -1,6 +1,9 @@
 /*
  * Copyright (c) 2025 Robin Gosse
  * SPDX-License-Identifier: MIT
+ * 
+ * PS/2 TrackPoint Configuration for BugBear ZMK Right
+ * Using infused-kim's PS/2 driver module
  */
 
 #include <dt-bindings/zmk/matrix_transform.h>
@@ -11,6 +14,9 @@
         zmk,matrix_transform = &default_transform;
     };
 
+    /* 
+     * Standard 5x6 matrix for 30-key layout 
+     */
     default_transform: keymap_transform_0 {
         compatible = "zmk,matrix-transform";
         columns = <6>;
@@ -25,10 +31,15 @@
         >;
     };
 
+    /* 
+     * Matrix scanning configuration
+     * Adjust row/col pins for your actual hardware
+     */
     kscan0: kscan {
         compatible = "zmk,kscan-gpio-matrix";
         diode-direction = "col2row";
         
+        // EXAMPLE row/col pins - ADJUST THESE FOR YOUR HARDWARE
         row-gpios
             = <&pro_micro 21 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>  // Row 0
             , <&pro_micro 20 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>  // Row 1
@@ -48,29 +59,143 @@
     };
 };
 
-/* PS/2 Trackpoint configuration */
+/*
+ * ============================================================================
+ * PS/2 TRACKPOINT UART DRIVER CONFIGURATION
+ * ============================================================================
+ * 
+ * TrackPoint connected to:
+ * - CLK (Clock) on pin 9 (P0.06 on nice!nano)
+ * - DATA on pin 8 (P0.08 on nice!nano)
+ * 
+ * The UART driver provides better performance than GPIO bit-banging
+ */
+
+/* Configure pinctrl for UART functionality on PS/2 pins */
 &pinctrl {
-    ps2_default: ps2_default {
+    /* 
+     * UART RX pin configuration for PS/2 DATA line
+     * Using pin 8 (P0.08) 
+     */
+    uart0_default: uart0_default {
         group1 {
-            psels = <NRF_PSEL(GPIO, 0, 8)>,  // Data on P0.08 (nice!nano pin 8)
-                    <NRF_PSEL(GPIO, 0, 6)>;   // Clock on P0.06 (nice!nano pin 9)
+            psels = <NRF_PSEL(UART_RX, 0, 8)>;  // DATA on P0.08 (nice!nano pin 8)
+        };
+    };
+
+    uart0_sleep: uart0_sleep {
+        group1 {
+            psels = <NRF_PSEL(UART_RX, 0, 8)>;
+            low-power-enable;
         };
     };
 };
 
-/ {
-    ps2_mouse: ps2_mouse {
-        compatible = "gpio-ps2";
-        status = "okay";
-        scl-gpios = <&gpio0 6 GPIO_ACTIVE_HIGH>;  // Clock pin 9
-        sda-gpios = <&gpio0 8 GPIO_ACTIVE_HIGH>;  // Data pin 8
-        pinctrl-0 = <&ps2_default>;
-        pinctrl-names = "default";
-    };
-
-    /* Input listener to convert PS/2 events to ZMK mouse input */
-    ps2_mouse_listener: ps2_mouse_listener {
-        compatible = "zmk,input-listener";
-        device = <&ps2_mouse>;
+/* 
+ * Configure UART0 for PS/2 communication
+ * Baud rate must match TrackPoint's clock frequency
+ * Most TrackPoints use ~14,925 baud, closest UART rate is 14,400
+ */
+&uart0 {
+    compatible = "nordic,nrf-uarte";
+    status = "okay";
+    
+    /* Apply pinctrl configuration */
+    pinctrl-0 = <&uart0_default>;
+    pinctrl-1 = <&uart0_sleep>;
+    pinctrl-names = "default", "sleep";
+    
+    /* 
+     * Baud rate for PS/2 communication
+     * 14400 works for most TrackPoints
+     * If your TrackPoint doesn't work, try 19200 or 9600
+     */
+    current-speed = <14400>;
+    
+    /* PS/2 device node */
+    trackpoint: trackpoint {
+        compatible = "zmk,input-ps2";
+        
+        /* 
+         * Clock and Data pins
+         * SCL = Clock on pin 9 (P0.06)
+         * SDA = Data on pin 8 (P0.08)
+         */
+        scl-gpios = <&gpio0 6 GPIO_ACTIVE_HIGH>;  // CLK on P0.06 (nice!nano pin 9)
+        sda-gpios = <&gpio0 8 GPIO_ACTIVE_HIGH>;  // DATA on P0.08 (nice!nano pin 8)
+        
+        /* 
+         * Optional: Reset pin for TrackPoint Power-On-Reset
+         * If you have a hardware reset circuit, comment this out
+         * Using pin 7 (P0.11) for reset
+         */
+        // rst-gpios = <&gpio0 11 GPIO_ACTIVE_HIGH>;  // RST on P0.11 (nice!nano pin 7)
     };
 };
+
+/* 
+ * Input listener to convert PS/2 events to ZMK mouse input
+ * This is what actually makes the mouse cursor move
+ */
+/ {
+    trackpoint_listener: trackpoint_listener {
+        compatible = "zmk,input-listener";
+        status = "okay";
+        
+        /* Link to the trackpoint device */
+        device = <&trackpoint>;
+        
+        /* 
+         * Optional: Configure axis behavior
+         * Uncomment and adjust if your trackpoint moves in the wrong direction
+         */
+        // xy-swap;           // Swap X and Y axes
+        // x-invert;          // Invert X axis
+        // y-invert;          // Invert Y axis
+        
+        /* 
+         * Optional: Scale factor for movement (1-255)
+         * Higher = more sensitive
+         * Default is usually good for most TrackPoints
+         */
+        // scale-multiplier = <1>;
+        // scale-divisor = <1>;
+    };
+};
+
+/*
+ * ============================================================================
+ * ALTERNATIVE: GPIO BIT-BANGING DRIVER (if UART doesn't work)
+ * ============================================================================
+ * 
+ * If the UART driver doesn't work with your TrackPoint (wrong clock frequency),
+ * you can try the GPIO bit-banging driver instead.
+ * 
+ * To enable:
+ * 1. Comment out all the &uart0 and &pinctrl sections above
+ * 2. Uncomment the section below
+ * 3. In your .conf file, change CONFIG_PS2_UART_ENABLE=y to CONFIG_PS2_GPIO_ENABLE=y
+ */
+
+/*
+/ {
+    trackpoint_gpio: trackpoint_gpio {
+        compatible = "zmk,input-ps2-gpio";
+        status = "okay";
+        
+        scl-gpios = <&gpio0 6 GPIO_ACTIVE_HIGH>;  // CLK on P0.06 (nice!nano pin 9)
+        sda-gpios = <&gpio0 8 GPIO_ACTIVE_HIGH>;  // DATA on P0.08 (nice!nano pin 8)
+        
+        // Optional: Reset pin
+        // rst-gpios = <&gpio0 11 GPIO_ACTIVE_HIGH>;  // RST on P0.11 (nice!nano pin 7)
+    };
+};
+
+/ {
+    trackpoint_listener_gpio: trackpoint_listener_gpio {
+        compatible = "zmk,input-listener";
+        status = "okay";
+        device = <&trackpoint_gpio>;
+    };
+};
+*/
