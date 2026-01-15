@@ -1,6 +1,9 @@
+# Copyright (c) 2025 Robin Gosse
+# SPDX-License-Identifier: MIT
+
 if SHIELD_BUGBEARZMNRIGHT
 
 config ZMK_KEYBOARD_NAME
-    default "BugbearZ Right"
+    default "BugBear ZMK Right"
 
 endif
