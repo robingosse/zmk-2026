@@ -1,2 +1,8 @@
+# Copyright (c) 2025 Robin Gosse
+# SPDX-License-Identifier: MIT
+
 config SHIELD_BUGBEARZMNRIGHT
     def_bool $(shields_list_contains,bugbearzmnright)
+    select PS2
+    select PS2_MOUSE
+    select ZMK_INPUT_MOUSE
