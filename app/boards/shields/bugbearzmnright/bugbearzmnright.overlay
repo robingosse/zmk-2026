@@ -17,23 +17,22 @@
     };
 
     /* 3. PS/2 INTERFACE (The Wires) */
-    /* This defines the raw connection to Pin 8 (Data) and Pin 9 (Clock) */
+    /* FIXED: Renamed properties to sda-gpios and scl-gpios as required by the error log */
     ps2_interface: ps2_interface {
         compatible = "gpio-ps2";
-        data-gpios = <&gpio0 8 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
-        clk-gpios = <&gpio0 9 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
+        sda-gpios = <&gpio0 8 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
+        scl-gpios = <&gpio0 9 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
         status = "okay";
     };
 
     /* 4. MOUSE INPUT (The Logic) */
-    /* This tells ZMK to use the interface defined above as a mouse */
     ps2_mouse {
         compatible = "zmk,input-mouse-ps2";
         ps2-device = <&ps2_interface>;
         status = "okay";
     };
 
-    /* 5. MATRIX CONFIGURATION (Identical to your working file) */
+    /* 5. MATRIX CONFIGURATION */
     kscan0: kscan0 {
         compatible = "zmk,kscan-gpio-matrix";
         diode-direction = "col2row"; 
@@ -55,7 +54,7 @@
             ;
     };
 
-    /* 6. MAP CONFIGURATION (Mathematically identical to yours) */
+    /* 6. MAP CONFIGURATION */
     default_transform: keymap_transform0 {
         compatible = "zmk,matrix-transform";
         columns = <6>;
@@ -69,7 +68,7 @@
         >;
     };
 
-    /* 7. PHYSICAL LAYOUT (Required for ZMK Studio) */
+    /* 7. PHYSICAL LAYOUT */
     physical_layout0: physical_layout_0 {
         compatible = "zmk,physical-layout";
         display-name = "Default Layout";
