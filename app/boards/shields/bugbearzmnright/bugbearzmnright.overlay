@@ -1,10 +1,10 @@
 #include <dt-bindings/zmk/matrix_transform.h>
 #include <behaviors.dtsi>
 
-/* 1. Define 'MX' to generate key numbers automatically (avoids conflicts) */
+/* Define MX macro */
 #define MX(r, c) ((r) * 6 + (c))
 
-/* 2. Patch &none so ZMK Studio accepts it as a key placeholder */
+/* Patch &none for ZMK Studio */
 &none {
     #key-cells = <0>;
 };
@@ -16,8 +16,10 @@
         zmk,physical-layout = &physical_layout0;
     };
 
-    /* 3. PS/2 INTERFACE (The Wires) */
-    /* FIXED: Renamed properties to sda-gpios and scl-gpios as required by the error log */
+    /* * PS/2 INTERFACE
+     * FIXED: Renamed 'data' -> 'sda' and 'clk' -> 'scl' 
+     * to satisfy the 'gpio-ps2' binding requirements.
+     */
     ps2_interface: ps2_interface {
         compatible = "gpio-ps2";
         sda-gpios = <&gpio0 8 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
@@ -25,14 +27,14 @@
         status = "okay";
     };
 
-    /* 4. MOUSE INPUT (The Logic) */
+    /* MOUSE INPUT */
     ps2_mouse {
         compatible = "zmk,input-mouse-ps2";
         ps2-device = <&ps2_interface>;
         status = "okay";
     };
 
-    /* 5. MATRIX CONFIGURATION */
+    /* MATRIX CONFIGURATION */
     kscan0: kscan0 {
         compatible = "zmk,kscan-gpio-matrix";
         diode-direction = "col2row"; 
@@ -54,7 +56,7 @@
             ;
     };
 
-    /* 6. MAP CONFIGURATION */
+    /* MAP CONFIGURATION */
     default_transform: keymap_transform0 {
         compatible = "zmk,matrix-transform";
         columns = <6>;
@@ -68,7 +70,7 @@
         >;
     };
 
-    /* 7. PHYSICAL LAYOUT */
+    /* PHYSICAL LAYOUT */
     physical_layout0: physical_layout_0 {
         compatible = "zmk,physical-layout";
         display-name = "Default Layout";
